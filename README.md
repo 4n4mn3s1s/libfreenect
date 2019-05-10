@@ -25,7 +25,6 @@
 ## 6) Also make a file with rules for the Linux device manager
     sudo nano /etc/udev/rules.d/51-kinect.rules
 ### Then paste the following and save
-<p>
     # ATTR{product}=="Xbox NUI Motor"
     SUBSYSTEM=="usb", ATTR{idVendor}=="045e", ATTR{idProduct}=="02b0", MODE="0666"
     # ATTR{product}=="Xbox NUI Audio"
@@ -38,7 +37,6 @@
     SUBSYSTEM=="usb", ATTR{idVendor}=="045e", ATTR{idProduct}=="02be", MODE="0666"
     # ATTR{product}=="Xbox NUI Motor"
     SUBSYSTEM=="usb", ATTR{idVendor}=="045e", ATTR{idProduct}=="02bf", MODE="0666"
-<p>
 	
 ## 7) Log out and back in. Run the following command in a terminal to test if libfreenect is correctly installed
 	freenect-glview
