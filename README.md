@@ -40,7 +40,50 @@
 	
 ## 7) Log out and back in. Run the following command in a terminal to test if libfreenect is correctly installed
 	freenect-glview
+This should cause a window to pop up showing the depth and RGB images. Pressing ‘w’ on the keyboard causes the kinect to tilt up and pressing ‘x’ causes the kinect to tilt down. There are several other control options that are listed in the terminal when “freenect-glview” is run
 
+## 8) In order to use the Kinect with opencv and python, the python wrappers for libfreenct need to be installed. Before doing that, install the necessary dependencies
+	sudo apt-get install cython
+	sudo apt-get install python-dev
+	sudo apt-get install python-numpy
+## 9) Go to the directory ……./libfreenect/wrappers/python and run the following command
+	sudo python setup.py install
+## 10) Save the code given below as a (.py) file say (kinect_test.py)
+	#import the necessary modules
+	import freenect
+	import cv2
+	import numpy as np
+
+	#function to get RGB image from kinect
+	def get_video():
+	    array,_ = freenect.sync_get_video()
+	    array = cv2.cvtColor(array,cv2.COLOR_RGB2BGR)
+	    return array
+
+	#function to get depth image from kinect
+	def get_depth():
+	    array,_ = freenect.sync_get_depth()
+	    array = array.astype(np.uint8)
+	    return array
+
+	if __name__ == "__main__":
+	    while 1:
+		#get a frame from RGB camera
+		frame = get_video()
+		#get a frame from depth sensor
+		depth = get_depth()
+		#display RGB image
+		cv2.imshow('RGB image',frame)
+		#display depth image
+		cv2.imshow('Depth image',depth)
+
+		# quit program when 'esc' key is pressed
+		k = cv2.waitKey(5) & 0xFF
+		if k == 27:
+		    break
+	    cv2.destroyAllWindows()
+  ## 11) Run the above program
+  	python kinect_test.py
 __________________________________________________________________________________________________________________
 
 libfreenect
