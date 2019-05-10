@@ -1,3 +1,50 @@
+# Instalation
+## 1)  Open a terminal and run the following commands
+
+
+    sudo apt-get update
+    sudo apt-get upgrade
+
+## 2) Install the necessary dependencies
+
+    sudo apt-get install git-core cmake freeglut3-dev pkg-config build-essential libxmu-dev libxi-dev libusb-1.0-0-dev
+
+## 3) Clone the libfreenect repository to your system
+    git clone git://github.com/OpenKinect/libfreenect.git
+## 4) Install libfreenect
+    cd libfreenect
+    mkdir build
+    cd build
+    cmake -L ..
+    make
+    sudo make install
+    sudo ldconfig /usr/local/lib64/
+## 5) To use Kinect as a non-root user do the following
+    sudo adduser $USER video
+    sudo adduser $USER plugdev
+## 6) Also make a file with rules for the Linux device manager
+    sudo nano /etc/udev/rules.d/51-kinect.rules
+### Then paste the following and save
+<p>
+    # ATTR{product}=="Xbox NUI Motor"
+    SUBSYSTEM=="usb", ATTR{idVendor}=="045e", ATTR{idProduct}=="02b0", MODE="0666"
+    # ATTR{product}=="Xbox NUI Audio"
+    SUBSYSTEM=="usb", ATTR{idVendor}=="045e", ATTR{idProduct}=="02ad", MODE="0666"
+    # ATTR{product}=="Xbox NUI Camera"
+    SUBSYSTEM=="usb", ATTR{idVendor}=="045e", ATTR{idProduct}=="02ae", MODE="0666"
+    # ATTR{product}=="Xbox NUI Motor"
+    SUBSYSTEM=="usb", ATTR{idVendor}=="045e", ATTR{idProduct}=="02c2", MODE="0666"
+    # ATTR{product}=="Xbox NUI Motor"
+    SUBSYSTEM=="usb", ATTR{idVendor}=="045e", ATTR{idProduct}=="02be", MODE="0666"
+    # ATTR{product}=="Xbox NUI Motor"
+    SUBSYSTEM=="usb", ATTR{idVendor}=="045e", ATTR{idProduct}=="02bf", MODE="0666"
+<p>
+	
+## 7) Log out and back in. Run the following command in a terminal to test if libfreenect is correctly installed
+	freenect-glview
+
+__________________________________________________________________________________________________________________
+
 libfreenect
 ===========
 
