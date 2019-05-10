@@ -1,4 +1,5 @@
 # Instalation
+Hay que instalarlo todo a nivel global, no he conseguido hacerlo funcionar en venv
 ## 1)  Open a terminal and run the following commands
 
 
